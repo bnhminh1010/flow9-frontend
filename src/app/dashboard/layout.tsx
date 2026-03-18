@@ -3,14 +3,18 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/hooks/useAuth';
-import { LayoutDashboard, BookText, Repeat, Banknote, Settings } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { LayoutDashboard, BookText, Target, Repeat, Banknote, TrendingUp, CreditCard, Settings } from 'lucide-react';
 
 const navItems = [
-  { href: '/dashboard', label: 'Overview', icon: LayoutDashboard },
-  { href: '/dashboard/ledger', label: 'Ledger', icon: BookText },
-  { href: '/dashboard/subscriptions', label: 'Subs', icon: Repeat },
-  { href: '/dashboard/payroll', label: 'Payroll', icon: Banknote },
-  { href: '/dashboard/settings', label: 'Config', icon: Settings },
+  { href: '/dashboard', labelKey: 'nav.overview', icon: LayoutDashboard },
+  { href: '/dashboard/ledger', labelKey: 'nav.ledger', icon: BookText },
+  { href: '/dashboard/budgets', labelKey: 'nav.budget', icon: Target },
+  { href: '/dashboard/subscriptions', labelKey: 'nav.subscriptions', icon: Repeat, shortLabel: 'SUBS' },
+  { href: '/dashboard/payroll', labelKey: 'nav.payroll', icon: Banknote },
+  { href: '/dashboard/investments', labelKey: 'nav.invest', icon: TrendingUp },
+  { href: '/dashboard/debts', labelKey: 'nav.debts', icon: CreditCard },
+  { href: '/dashboard/settings', labelKey: 'nav.config', icon: Settings },
 ];
 
 export default function DashboardLayout({
@@ -20,6 +24,7 @@ export default function DashboardLayout({
 }) {
   const pathname = usePathname();
   const { logout } = useAuth();
+  const { t } = useLanguage();
 
   return (
     <div className="flex flex-col min-h-[100dvh] bg-[#000000] overflow-x-hidden" style={{ padding: 'clamp(12px, 2vw, 32px) clamp(24px, 4vw, 64px)', boxSizing: 'border-box' }}>
@@ -42,7 +47,7 @@ export default function DashboardLayout({
             onClick={logout}
             className="font-mono text-xs uppercase tracking-widest text-[#E4E4E7] hover:text-[#FAFAFA] border-2 border-[#A1A1AA] hover:border-[#E4E4E7] px-4 py-2 lg:px-6 lg:py-2.5 bg-[#0A0A0A] hover:bg-[#111] transition-colors rounded-[4px]"
           >
-            Terminal_Exit
+            {t('logout')}
           </button>
         </div>
 
@@ -57,7 +62,7 @@ export default function DashboardLayout({
 
       {/* The Floating Dock */}
       <div className="fixed bottom-6 lg:bottom-12 left-1/2 -translate-x-1/2 z-50">
-        <nav className="flex items-center gap-2 p-2 bg-[#050505] backdrop-blur-3xl border-2 border-[#555] hover:border-[#FAFAFA] rounded-[4px] shadow-[0_0_40px_rgba(0,0,0,1)] transition-colors duration-500">
+        <nav className="flex items-center gap-1 p-1.5 bg-[#050505] backdrop-blur-3xl border-2 border-[#555] hover:border-[#FAFAFA] rounded-[4px] shadow-[0_0_40px_rgba(0,0,0,1)] transition-colors duration-500">
           {navItems.map((item) => {
             const isActive = pathname === item.href || 
               (item.href !== '/dashboard' && pathname.startsWith(item.href));
@@ -65,7 +70,7 @@ export default function DashboardLayout({
               <Link
                 key={item.href}
                 href={item.href}
-                className={`relative flex flex-col items-center justify-center w-16 h-14 lg:w-24 lg:h-20 gap-1.5 rounded-[2px] transition-all duration-300 group ${
+                className={`relative flex flex-col items-center justify-center w-14 h-14 lg:w-20 lg:h-16 gap-1 rounded-[2px] transition-all duration-300 group ${
                   isActive 
                     ? 'bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.2)]' 
                     : 'text-[#A1A1AA] hover:text-[#FAFAFA] hover:bg-[#222]'
@@ -75,7 +80,7 @@ export default function DashboardLayout({
                   <div className="absolute -top-[2px] left-1/2 -translate-x-1/2 w-8 h-[4px] bg-[#22C55E] shadow-[0_0_12px_rgba(34,197,94,1)]" />
                 )}
                 <item.icon className={`w-5 h-5 lg:w-6 lg:h-6 transition-transform duration-300 ${isActive ? 'scale-110' : 'group-hover:-translate-y-1'}`} strokeWidth={2} />
-                <span className="text-[10px] lg:text-xs font-mono tracking-widest uppercase font-bold mt-1">{item.label}</span>
+                <span className="text-[9px] lg:text-[10px] font-mono tracking-widest uppercase font-bold mt-0.5">{item.shortLabel || t(item.labelKey)}</span>
               </Link>
             );
           })}
