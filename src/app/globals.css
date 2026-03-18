@@ -1,0 +1,110 @@
+@import "tailwindcss";
+
+:root {
+  /* Primary Colors */
+  --color-primary: #0D9488;
+  --color-primary-light: #14B8A6;
+  --color-primary-dark: #0F766E;
+
+  /* Background Colors */
+  --color-bg-primary: #09090B;
+  --color-bg-secondary: #18181B;
+  --color-bg-tertiary: #27272A;
+
+  /* Border Colors */
+  --color-border: #3F3F46;
+  --color-border-light: #52525B;
+
+  /* Text Colors */
+  --color-text-primary: #FAFAFA;
+  --color-text-secondary: #A1A1AA;
+  --color-text-muted: #71717A;
+
+  /* Accent Colors */
+  --color-success: #22C55E;
+  --color-warning: #F59E0B;
+  --color-danger: #EF4444;
+  --color-info: #3B82F6;
+
+  /* Category Colors */
+  --color-cat-food: #F97316;
+  --color-cat-shopping: #EC4899;
+  --color-cat-transport: #EAB308;
+  --color-cat-bills: #22C55E;
+  --color-cat-entertainment: #8B5CF6;
+  --color-cat-salary: #0D9488;
+  --color-cat-bonus: #06B6D4;
+}
+
+@theme inline {
+  --color-primary: var(--color-primary);
+  --color-primary-light: var(--color-primary-light);
+  --color-primary-dark: var(--color-primary-dark);
+  
+  --color-bg-primary: var(--color-bg-primary);
+  --color-bg-secondary: var(--color-bg-secondary);
+  --color-bg-tertiary: var(--color-bg-tertiary);
+  
+  --color-border: var(--color-border);
+  --color-border-light: var(--color-border-light);
+  
+  --color-text-primary: var(--color-text-primary);
+  --color-text-secondary: var(--color-text-secondary);
+  --color-text-muted: var(--color-text-muted);
+  
+  --color-success: var(--color-success);
+  --color-warning: var(--color-warning);
+  --color-danger: var(--color-danger);
+  --color-info: var(--color-info);
+  
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  font-family: inherit;
+}
+
+body {
+  background-color: #000000;
+  color: #FAFAFA;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-bg-tertiary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-border);
+}
+
+
+
+/* Number input hide arrows */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
