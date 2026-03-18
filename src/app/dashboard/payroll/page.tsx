@@ -11,6 +11,7 @@ export default function PayrollPage() {
   const [showForm, setShowForm] = useState(false);
   const [showConfig, setShowConfig] = useState(false);
   const [wageConfig, setWageConfig] = useState<SalaryConfig | null>(null);
+  const [isPosting, setIsPosting] = useState(false);
 
   const currentDate = new Date();
   const [selectedYear, setSelectedYear] = useState(currentDate.getFullYear());
@@ -94,6 +95,31 @@ export default function PayrollPage() {
       fetchData();
     } catch (error) {
       console.error('Error deleting shift:', error);
+    }
+  };
+
+  const handleReceivePaycheck = async () => {
+    if (!summary || summary.totalSalary <= 0) {
+      alert('Không có lương để nhận trong tháng này!');
+      return;
+    }
+    if (!confirm(`Bạn muốn ghi nhận lương ${formatCurrency(summary.totalSalary)} của tháng ${selectedMonth}/${selectedYear} vào sổ cái (Ledger)?`)) return;
+
+    setIsPosting(true);
+    try {
+      await api.post('/api/transactions', {
+        type: 'income',
+        amount: summary.totalSalary,
+        category: 'Lương',
+        description: `Lương tháng ${selectedMonth}/${selectedYear}`,
+        date: new Date().toISOString()
+      });
+      alert('Đã ghi nhận lương vào sổ cái thành công!');
+    } catch (error) {
+      console.error('Error posting paycheck:', error);
+      alert('Có lỗi xảy ra khi ghi nhận lương.');
+    } finally {
+      setIsPosting(false);
     }
   };
 
@@ -198,7 +224,16 @@ export default function PayrollPage() {
           </div>
           <div className="text-left md:text-right border-t md:border-t-0 border-[#555] pt-6 md:pt-0">
             <span className="font-mono text-[10px] text-[#E4E4E7] uppercase tracking-widest block mb-2">Total Projected Yield</span>
-            <span className="text-4xl lg:text-5xl font-black text-white">{formatCurrency(summary?.totalSalary || 0)}</span>
+            <div className="flex flex-col md:items-end gap-3">
+              <span className="text-4xl lg:text-5xl font-black text-white">{formatCurrency(summary?.totalSalary || 0)}</span>
+              <button 
+                onClick={handleReceivePaycheck}
+                disabled={!summary || summary.totalSalary <= 0 || isPosting}
+                className="font-mono text-[10px] uppercase tracking-widest text-[#22C55E] border-2 border-[#22C55E]/50 px-4 py-2 hover:bg-[#22C55E] hover:text-black transition-colors rounded-[2px] disabled:opacity-50 mt-2"
+              >
+                {isPosting ? 'POSTING...' : '[ POST_TO_LEDGER ]'}
+              </button>
+            </div>
           </div>
         </div>
 

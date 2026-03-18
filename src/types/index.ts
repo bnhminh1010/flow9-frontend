@@ -66,6 +66,7 @@ export interface Subscription {
     date: string;
     amount: number;
     status: 'paid' | 'pending' | 'failed';
+    notes?: string;
     transactionId?: string;
   }>;
   createdAt: string;
