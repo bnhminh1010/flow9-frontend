@@ -11,15 +11,14 @@ class ApiError extends Error {
   }
 }
 
-function getAuthHeaders(headers: HeadersInit = {}): HeadersInit {
+function getAuthHeaders(headers: Record<string, string> = {}): Record<string, string> {
   const token = typeof window !== 'undefined' ? localStorage.getItem('flow9_token') : null;
-  const authHeaders: HeadersInit = { ...headers };
   
   if (token) {
-    authHeaders['Authorization'] = `Bearer ${token}`;
+    headers['Authorization'] = `Bearer ${token}`;
   }
   
-  return authHeaders;
+  return headers;
 }
 
 async function fetchApi<T>(
@@ -28,7 +27,7 @@ async function fetchApi<T>(
 ): Promise<T> {
   const { skipAuth = false, ...fetchOptions } = options;
 
-  const headers = getAuthHeaders(fetchOptions.headers as HeadersInit);
+  const headers = getAuthHeaders(fetchOptions.headers as Record<string, string>);
   if (!headers['Content-Type']) {
     headers['Content-Type'] = 'application/json';
   }
@@ -81,9 +80,9 @@ export class ApiClient {
     options: RequestInit = {}
   ): Promise<T> {
     const token = typeof window !== 'undefined' ? localStorage.getItem('flow9_token') : null;
-    const headers: HeadersInit = {
+    const headers: Record<string, string> = {
       'Content-Type': 'application/json',
-      ...options.headers as HeadersInit,
+      ...(options.headers as Record<string, string>),
     };
     if (token) {
       headers['Authorization'] = `Bearer ${token}`;
