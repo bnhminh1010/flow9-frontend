@@ -11,16 +11,27 @@ class ApiError extends Error {
   }
 }
 
+function getAuthHeaders(headers: HeadersInit = {}): HeadersInit {
+  const token = typeof window !== 'undefined' ? localStorage.getItem('flow9_token') : null;
+  const authHeaders: HeadersInit = { ...headers };
+  
+  if (token) {
+    authHeaders['Authorization'] = `Bearer ${token}`;
+  }
+  
+  return authHeaders;
+}
+
 async function fetchApi<T>(
   endpoint: string,
   options: FetchOptions = {}
 ): Promise<T> {
   const { skipAuth = false, ...fetchOptions } = options;
 
-  const headers: HeadersInit = {
-    'Content-Type': 'application/json',
-    ...fetchOptions.headers,
-  };
+  const headers = getAuthHeaders(fetchOptions.headers as HeadersInit);
+  if (!headers['Content-Type']) {
+    headers['Content-Type'] = 'application/json';
+  }
 
   const response = await fetch(`${API_BASE_URL}${endpoint}`, {
     ...fetchOptions,
@@ -69,13 +80,19 @@ export class ApiClient {
     endpoint: string,
     options: RequestInit = {}
   ): Promise<T> {
+    const token = typeof window !== 'undefined' ? localStorage.getItem('flow9_token') : null;
+    const headers: HeadersInit = {
+      'Content-Type': 'application/json',
+      ...options.headers as HeadersInit,
+    };
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
+    }
+
     const response = await fetch(`${this.baseUrl}${endpoint}`, {
       ...options,
       credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-        ...options.headers,
-      },
+      headers,
     });
 
     if (!response.ok) {
