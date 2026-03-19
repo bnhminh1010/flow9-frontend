@@ -9,27 +9,12 @@ const spaceMono = Space_Mono({ weight: ["400", "700"], subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Flow9 - Personal Finance",
   description: "Flow9 - Personal Life OS - Quản lý tài chính cá nhân",
-  icons: {
-    icon: "/thumbnail.jpg",
-  },
   openGraph: {
-    title: "Flow9 - Personal Finance",
-    description: "Flow9 - Personal Life OS - Quản lý tài chính cá nhân",
-    url: "https://flow9-os.vercel.app",
-    siteName: "Flow9",
-    images: [
-      {
-        url: "https://flow9-os.vercel.app/thumbnail.jpg",
-        width: 1165,
-        height: 896,
-      },
-    ],
+    images: "https://flow9-os.vercel.app/thumbnail.jpg",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Flow9 - Personal Finance",
-    description: "Flow9 - Personal Life OS - Quản lý tài chính cá nhân",
-    images: ["https://flow9-os.vercel.app/thumbnail.jpg"],
+    images: "https://flow9-os.vercel.app/thumbnail.jpg",
   },
 };
 
