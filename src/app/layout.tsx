@@ -7,11 +7,17 @@ import { LanguageProvider } from "@/contexts/LanguageContext";
 const spaceMono = Space_Mono({ weight: ["400", "700"], subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://flow9-os.vercel.app"),
   title: "Flow9 - Personal Finance",
   description: "Flow9 - Personal Life OS - Quản lý tài chính cá nhân",
   icons: { icon: "/thumbnail.jpg" },
-  openGraph: { images: "/thumbnail.jpg" },
-  twitter: { card: "summary_large_image", images: "/thumbnail.jpg" },
+  openGraph: {
+    images: ["/thumbnail.jpg"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/thumbnail.jpg"],
+  },
 };
 
 export default function RootLayout({
