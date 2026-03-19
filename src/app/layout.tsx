@@ -13,11 +13,23 @@ export const metadata: Metadata = {
     icon: "/thumbnail.jpg",
   },
   openGraph: {
-    images: "/thumbnail.jpg",
+    title: "Flow9 - Personal Finance",
+    description: "Flow9 - Personal Life OS - Quản lý tài chính cá nhân",
+    url: "https://flow9-os.vercel.app",
+    siteName: "Flow9",
+    images: [
+      {
+        url: "https://flow9-os.vercel.app/thumbnail.jpg",
+        width: 1165,
+        height: 896,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    images: "/thumbnail.jpg",
+    title: "Flow9 - Personal Finance",
+    description: "Flow9 - Personal Life OS - Quản lý tài chính cá nhân",
+    images: ["https://flow9-os.vercel.app/thumbnail.jpg"],
   },
 };
 
