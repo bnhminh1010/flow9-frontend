@@ -15,11 +15,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Flow9 - Personal Finance",
     description: "Flow9 - Personal Life OS - Quản lý tài chính cá nhân",
-    url: "https://flow9.app",
+    url: "https://flow9-os.vercel.app",
     siteName: "Flow9",
     images: [
       {
-        url: "https://flow9.app/thumbnail.jpg",
+        url: "https://flow9-os.vercel.app/thumbnail.jpg",
         width: 1165,
         height: 896,
       },
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Flow9 - Personal Finance",
     description: "Flow9 - Personal Life OS - Quản lý tài chính cá nhân",
-    images: ["https://flow9.app/thumbnail.jpg"],
+    images: ["https://flow9-os.vercel.app/thumbnail.jpg"],
   },
 };
 
