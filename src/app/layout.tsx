@@ -10,13 +10,27 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://flow9-os.vercel.app"),
   title: "Flow9 - Personal Finance",
   description: "Flow9 - Personal Life OS - Quản lý tài chính cá nhân",
-  icons: { icon: "/thumbnail.jpg" },
   openGraph: {
-    images: ["/thumbnail.jpg"],
+    type: "website",
+    url: "https://flow9-os.vercel.app",
+    title: "Flow9 - Personal Finance",
+    description: "Flow9 - Personal Life OS - Quản lý tài chính cá nhân",
+    siteName: "Flow9",
+    locale: "vi_VN",
+    images: [
+      {
+        url: "https://flow9-os.vercel.app/thumbnail.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Flow9 - Personal Finance Thumbnail",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    images: ["/thumbnail.jpg"],
+    title: "Flow9 - Personal Finance",
+    description: "Flow9 - Personal Life OS - Quản lý tài chính cá nhân",
+    images: ["https://flow9-os.vercel.app/thumbnail.jpg"],
   },
 };
 
