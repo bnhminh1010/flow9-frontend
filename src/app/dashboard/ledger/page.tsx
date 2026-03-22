@@ -50,17 +50,22 @@ export default function LedgerPage() {
     }
   };
 
+  const [submitError, setSubmitError] = useState('');
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim() || submitting) return;
 
+    setSubmitError('');
     setSubmitting(true);
     try {
       await api.post('/api/transactions', { input });
       setInput('');
       fetchData();
-    } catch (error) {
+    } catch (error: unknown) {
       console.error('Error creating transaction:', error);
+      const err = error as { message?: string };
+      setSubmitError(err.message || 'Failed to create transaction');
     } finally {
       setSubmitting(false);
     }
@@ -312,6 +317,11 @@ export default function LedgerPage() {
             {submitting ? 'EXECUTING' : 'COMMIT_'}
           </button>
         </form>
+        {submitError && (
+          <div className="mt-4 p-4 bg-red-500/20 border border-red-500/50 rounded text-red-400 font-mono text-sm">
+            ERROR: {submitError}
+          </div>
+        )}
       </div>
 
       {/* Filters */}

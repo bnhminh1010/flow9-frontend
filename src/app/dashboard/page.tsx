@@ -9,6 +9,7 @@ export default function DashboardPage() {
   const [aggregate, setAggregate] = useState<AggregateResponse | null>(null);
   const [upcomingSubs, setUpcomingSubs] = useState<UpcomingSubscription[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
@@ -16,19 +17,21 @@ export default function DashboardPage() {
 
   const fetchDashboardData = useCallback(async () => {
     setLoading(true);
+    setError(null);
     try {
-      const cacheBuster = Date.now();
       const [salaryRes, aggregateRes, subsRes] = await Promise.all([
-        api.get<{ summary: MonthlySummary }>(`/api/salary/summary?year=${currentYear}&month=${currentMonth}&_cb=${cacheBuster}`),
-        api.get<AggregateResponse>(`/api/transactions/aggregate?year=${currentYear}&month=${currentMonth}&_cb=${cacheBuster}`),
-        api.get<{ subscriptions: UpcomingSubscription[] }>(`/api/subscriptions/upcoming?days=7&_cb=${cacheBuster}`),
+        api.get<{ summary: MonthlySummary }>(`/api/salary/summary?year=${currentYear}&month=${currentMonth}`),
+        api.get<AggregateResponse>(`/api/transactions/aggregate?year=${currentYear}&month=${currentMonth}`),
+        api.get<{ subscriptions: UpcomingSubscription[] }>('/api/subscriptions/upcoming?days=7'),
       ]);
 
       setSalarySummary(salaryRes.summary);
       setAggregate(aggregateRes);
       setUpcomingSubs(subsRes.subscriptions);
-    } catch (error) {
-      console.error('Error fetching dashboard data:', error);
+    } catch (err: unknown) {
+      console.error('Error fetching dashboard data:', err);
+      const e = err as { message?: string };
+      setError(e.message || 'Failed to load data');
     } finally {
       setLoading(false);
     }
@@ -105,6 +108,23 @@ export default function DashboardPage() {
           <div className="absolute top-0 left-0 h-full w-full bg-[#333]"></div>
         </div>
         <div className="font-mono text-xs uppercase tracking-widest text-[#A1A1AA]">Loading...</div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex flex-col items-center justify-center h-[50vh] gap-4 p-8">
+        <div className="p-6 bg-red-500/20 border border-red-500/50 rounded text-red-400 font-mono text-sm text-center max-w-lg">
+          <p className="font-bold mb-2">ERROR:</p>
+          <p>{error}</p>
+        </div>
+        <button
+          onClick={fetchDashboardData}
+          className="font-mono text-xs uppercase tracking-widest text-black bg-white px-4 py-2 border-2 border-transparent hover:bg-[#A1A1AA] transition-colors rounded-[2px]"
+        >
+          Retry
+        </button>
       </div>
     );
   }
