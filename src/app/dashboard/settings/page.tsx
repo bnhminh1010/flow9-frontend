@@ -167,7 +167,7 @@ export default function SettingsPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         
         {/* Language */}
-        <div className="p-8 bg-[#0A0A0A] border border-[#333] rounded-[4px]">
+        <div data-tour="currency-settings" className="p-8 bg-[#0A0A0A] border border-[#333] rounded-[4px]">
           <h3 className="font-mono text-sm font-bold tracking-widest uppercase text-white mb-6 border-b border-[#222] pb-4">
             Language
           </h3>
@@ -197,7 +197,7 @@ export default function SettingsPage() {
         </div>
 
         {/* Change PIN */}
-        <div className="p-8 bg-[#0A0A0A] border border-[#333] rounded-[4px]">
+        <div data-tour="account-settings" className="p-8 bg-[#0A0A0A] border border-[#333] rounded-[4px]">
           <h3 className="font-mono text-sm font-bold tracking-widest uppercase text-white mb-6 border-b border-[#222] pb-4">
             {t('settings.changePin')}
           </h3>
@@ -258,7 +258,7 @@ export default function SettingsPage() {
         </div>
 
         {/* Export / Import */}
-        <div className="p-8 bg-[#0A0A0A] border border-[#333] rounded-[4px]">
+        <div data-tour="data-management" className="p-8 bg-[#0A0A0A] border border-[#333] rounded-[4px]">
           <h3 className="font-mono text-sm font-bold tracking-widest uppercase text-white mb-6 border-b border-[#222] pb-4">
             {t('settings.exportData')} / {t('settings.importData')}
           </h3>

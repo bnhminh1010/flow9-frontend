@@ -188,7 +188,7 @@ export default function InvestmentsPage() {
               {updatingPrices ? t('common.loading') + '...' : '🔄 UPDATE PRICES'}
             </button>
           )}
-          <button onClick={() => setShowAdd(!showAdd)} className="font-mono text-xs uppercase bg-white text-black px-4 py-2 rounded-[2px] hover:bg-[#A1A1AA]">
+          <button data-tour="add-investment-btn" onClick={() => setShowAdd(!showAdd)} className="font-mono text-xs uppercase bg-white text-black px-4 py-2 rounded-[2px] hover:bg-[#A1A1AA]">
             {showAdd ? t('common.cancel').toUpperCase() : '+ ' + t('common.add').toUpperCase()}
           </button>
         </div>
@@ -285,13 +285,13 @@ export default function InvestmentsPage() {
         </form>
       )}
 
-      <div className="grid grid-cols-3 gap-4 mb-8">
+      <div data-tour="investment-summary" className="grid grid-cols-3 gap-4 mb-8">
         <div className="p-4 bg-[#0A0A0A] border border-[#333] rounded-[2px]"><span className="font-mono text-[10px] text-[#A1A1AA] uppercase">{t('invest.totalValue')}</span><p className="font-mono text-2xl font-black text-white mt-1">{formatCurrency(summary.totalValue)}</p></div>
         <div className="p-4 bg-[#0A0A0A] border border-[#333] rounded-[2px]"><span className="font-mono text-[10px] text-[#A1A1AA] uppercase">{t('invest.cost')}</span><p className="font-mono text-2xl font-black text-[#A1A1AA] mt-1">{formatCurrency(summary.totalCost)}</p></div>
-        <div className="p-4 bg-[#0A0A0A] border border-[#333] rounded-[2px]"><span className="font-mono text-[10px] text-[#A1A1AA] uppercase">{t('invest.profitLoss')}</span><p className={`font-mono text-2xl font-black mt-1 ${summary.totalProfitLoss >= 0 ? 'text-[#22C55E]' : 'text-[#EF4444]'}`}>{summary.totalProfitLoss >= 0 ? '+' : ''}{formatCurrency(summary.totalProfitLoss)}</p></div>
+        <div data-tour="performance-stats" className="p-4 bg-[#0A0A0A] border border-[#333] rounded-[2px]"><span className="font-mono text-[10px] text-[#A1A1AA] uppercase">{t('invest.profitLoss')}</span><p className={`font-mono text-2xl font-black mt-1 ${summary.totalProfitLoss >= 0 ? 'text-[#22C55E]' : 'text-[#EF4444]'}`}>{summary.totalProfitLoss >= 0 ? '+' : ''}{formatCurrency(summary.totalProfitLoss)}</p></div>
       </div>
 
-      <div className="space-y-4">
+      <div data-tour="portfolio-list" className="space-y-4">
         {investments.map(inv => (
           <div key={inv._id} className="p-6 bg-[#0A0A0A] border border-[#333] hover:border-[#555] rounded-[2px]">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">

@@ -102,7 +102,7 @@ export default function BudgetsPage() {
           <h2 className="text-[clamp(3rem,6vw,5rem)] font-black leading-[0.85] tracking-tighter uppercase text-white">{t('budget.title')}</h2>
           <p className="font-mono text-xs text-[#A1A1AA] mt-2">{budgets.length} {t('common.budgets')} / {goals.length} {t('common.goals')}</p>
         </div>
-        <button onClick={() => setShowAdd(!showAdd)} className="font-mono text-xs uppercase bg-white text-black px-4 py-2 rounded-[2px] hover:bg-[#A1A1AA]">
+        <button data-tour="add-budget-btn" onClick={() => setShowAdd(!showAdd)} className="font-mono text-xs uppercase bg-white text-black px-4 py-2 rounded-[2px] hover:bg-[#A1A1AA]">
           {showAdd ? t('common.cancel').toUpperCase() : '+ ' + t('common.add').toUpperCase()}
         </button>
       </header>
@@ -135,7 +135,7 @@ export default function BudgetsPage() {
         </form>
       )}
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+      <div data-tour="budget-overview" className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
         <div className="p-4 bg-[#0A0A0A] border border-[#333] rounded-[2px]"><span className="font-mono text-[10px] text-[#A1A1AA] uppercase">{t('budget.totalBudget')}</span><p className="font-mono text-2xl font-black text-white mt-1">{formatCurrency(summary.totalBudget)}</p></div>
         <div className="p-4 bg-[#0A0A0A] border border-[#333] rounded-[2px]"><span className="font-mono text-[10px] text-[#A1A1AA] uppercase">{t('budget.spent')}</span><p className={`font-mono text-2xl font-black mt-1 ${summary.totalSpent > summary.totalBudget ? 'text-[#EF4444]' : 'text-white'}`}>{formatCurrency(summary.totalSpent)}</p></div>
         <div className="p-4 bg-[#0A0A0A] border border-[#333] rounded-[2px]"><span className="font-mono text-[10px] text-[#A1A1AA] uppercase">{t('budget.goalsTarget')}</span><p className="font-mono text-2xl font-black text-white mt-1">{formatCurrency(summary.totalGoals)}</p></div>
@@ -143,7 +143,7 @@ export default function BudgetsPage() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="p-6 bg-[#0A0A0A] border border-[#333] rounded-[2px]">
+        <div data-tour="budget-categories" className="p-6 bg-[#0A0A0A] border border-[#333] rounded-[2px]">
           <h3 className="font-mono text-sm font-bold text-white uppercase mb-4 border-b border-[#222] pb-4">{t('budget.budgets').toUpperCase()}</h3>
           <div className="space-y-4">
             {budgets.map(b => (
@@ -155,7 +155,7 @@ export default function BudgetsPage() {
                   </div>
                   <button onClick={() => handleDelete(b._id)} className="text-[#71717A] hover:text-[#EF4444]">✕</button>
                 </div>
-                <div className="h-2 bg-[#111] rounded-[2px] overflow-hidden mb-2">
+                <div data-tour="budget-progress" className="h-2 bg-[#111] rounded-[2px] overflow-hidden mb-2">
                   <div className={`h-full ${b.isOverBudget ? 'bg-[#EF4444]' : b.percentage >= b.alertThreshold ? 'bg-[#F59E0B]' : 'bg-[#22C55E]'}`} style={{ width: `${Math.min(100, b.percentage)}%` }} />
                 </div>
                 <div className="flex justify-between font-mono text-[10px]">

@@ -99,7 +99,7 @@ export default function DebtsPage() {
           <h2 className="text-[clamp(3rem,6vw,5rem)] font-black leading-[0.85] tracking-tighter uppercase text-white">{t('debts.title')}</h2>
           <p className="font-mono text-xs text-[#A1A1AA] mt-2">{summary.activeCount} {t('common.active')} / {summary.overdueCount} {t('common.overdue')}</p>
         </div>
-        <button onClick={() => setShowAdd(!showAdd)} className="font-mono text-xs uppercase bg-white text-black px-4 py-2 rounded-[2px] hover:bg-[#A1A1AA]">
+        <button data-tour="add-debt-btn" onClick={() => setShowAdd(!showAdd)} className="font-mono text-xs uppercase bg-white text-black px-4 py-2 rounded-[2px] hover:bg-[#A1A1AA]">
           {showAdd ? t('common.cancel').toUpperCase() : '+ ' + t('debts.addDebt').toUpperCase()}
         </button>
       </header>
@@ -115,23 +115,23 @@ export default function DebtsPage() {
         </form>
       )}
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+      <div data-tour="debt-overview" className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
         <div className="p-4 bg-[#0A0A0A] border border-[#333] rounded-[2px]"><span className="font-mono text-[10px] text-[#A1A1AA] uppercase">{t('debts.totalDebt')}</span><p className="font-mono text-2xl font-black text-[#EF4444] mt-1">{formatCurrency(summary.totalDebt)}</p></div>
         <div className="p-4 bg-[#0A0A0A] border border-[#333] rounded-[2px]"><span className="font-mono text-[10px] text-[#A1A1AA] uppercase">{t('debts.paid')}</span><p className="font-mono text-2xl font-black text-[#22C55E] mt-1">{formatCurrency(summary.totalPaid)}</p></div>
         <div className="p-4 bg-[#0A0A0A] border border-[#333] rounded-[2px]"><span className="font-mono text-[10px] text-[#A1A1AA] uppercase">{t('debts.remaining')}</span><p className="font-mono text-2xl font-black text-white mt-1">{formatCurrency(summary.totalDebt - summary.totalPaid)}</p></div>
         <div className="p-4 bg-[#0A0A0A] border border-[#333] rounded-[2px]"><span className="font-mono text-[10px] text-[#A1A1AA] uppercase">{t('debts.overdue')}</span><p className="font-mono text-2xl font-black text-[#EF4444] mt-1">{summary.overdueCount}</p></div>
       </div>
 
-      <div className="space-y-4">
+      <div data-tour="debt-list" className="space-y-4">
         {debts.map(debt => (
-          <div key={debt._id} className={`p-6 bg-[#0A0A0A] border rounded-[2px] ${debt.status === 'paid' ? 'border-[#22C55E]' : debt.status === 'overdue' ? 'border-[#EF4444]' : 'border-[#333]'}`}>
+          <div key={debt._id} data-tour="payment-schedule" className={`p-6 bg-[#0A0A0A] border rounded-[2px] ${debt.status === 'paid' ? 'border-[#22C55E]' : debt.status === 'overdue' ? 'border-[#EF4444]' : 'border-[#333]'}`}>
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-3">
                   <p className="font-mono font-bold text-white uppercase">{debt.name}</p>
                   <span className={`font-mono text-[10px] px-2 py-1 rounded-[2px] ${debt.status === 'paid' ? 'bg-[#22C55E]/20 text-[#22C55E]' : debt.status === 'overdue' ? 'bg-[#EF4444]/20 text-[#EF4444]' : 'bg-[#222] text-[#A1A1AA]'}`}>{debt.status.toUpperCase()}</span>
                 </div>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div data-tour="debt-payoff-plan" className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   <div><p className="font-mono text-[10px] text-[#71717A]">{t('common.total')}</p><p className="font-mono font-bold text-white">{formatCurrency(debt.totalAmount)}</p></div>
                   <div><p className="font-mono text-[10px] text-[#71717A]">{t('debts.paid')}</p><p className="font-mono font-bold text-[#22C55E]">{formatCurrency(debt.paidAmount)}</p></div>
                   <div><p className="font-mono text-[10px] text-[#71717A]">{t('debts.remaining')}</p><p className="font-mono font-bold text-[#EF4444]">{formatCurrency(debt.remainingAmount)}</p></div>

@@ -5,7 +5,9 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/hooks/useAuth';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { LayoutDashboard, BookText, Target, Repeat, Banknote, TrendingUp, CreditCard, Settings, Menu, X } from 'lucide-react';
+import { useTutorial } from '@/contexts/TutorialContext';
+import HelpButton from '@/components/Tutorial/HelpButton';
+import { LayoutDashboard, BookText, Target, Repeat, Banknote, TrendingUp, CreditCard, Settings, Menu, X, HelpCircle } from 'lucide-react';
 
 const navItems = [
   { href: '/dashboard', labelKey: 'nav.overview', icon: LayoutDashboard },
@@ -27,6 +29,7 @@ export default function DashboardLayout({
   const { logout } = useAuth();
   const { t } = useLanguage();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { startTour } = useTutorial();
 
   return (
     <div className="flex flex-col min-h-[100dvh] bg-[#000000] overflow-x-hidden" style={{ padding: 'clamp(12px, 2vw, 32px) clamp(24px, 4vw, 64px)', boxSizing: 'border-box' }}>
@@ -46,13 +49,16 @@ export default function DashboardLayout({
             <span className="font-mono text-sm lg:text-base font-bold tracking-widest uppercase text-white">Flow9._</span>
           </div>
           
-          {/* Desktop logout */}
-          <button 
-            onClick={logout}
-            className="hidden lg:block font-mono text-xs uppercase tracking-widest text-[#E4E4E7] hover:text-[#FAFAFA] border-2 border-[#A1A1AA] hover:border-[#E4E4E7] px-4 py-2 bg-[#0A0A0A] hover:bg-[#111] transition-colors rounded-[4px]"
-          >
-            {t('logout')}
-          </button>
+          {/* Desktop Nav Buttons */}
+          <div className="flex items-center gap-2">
+            <HelpButton onStartTour={startTour} />
+            <button 
+              onClick={logout}
+              className="hidden lg:block font-mono text-xs uppercase tracking-widest text-[#E4E4E7] hover:text-[#FAFAFA] border-2 border-[#A1A1AA] hover:border-[#E4E4E7] px-4 py-2 bg-[#0A0A0A] hover:bg-[#111] transition-colors rounded-[4px]"
+            >
+              {t('logout')}
+            </button>
+          </div>
 
           {/* Mobile menu button */}
           <button 

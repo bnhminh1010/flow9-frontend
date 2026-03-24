@@ -180,6 +180,7 @@ export default function PayrollPage() {
              [ BASE_WAGE ]
           </button>
           <button
+            data-tour="add-income-btn"
             onClick={() => { setShowForm(!showForm); setShowConfig(false); }}
             className={`font-mono text-xs uppercase tracking-widest px-6 py-3 border-2 transition-colors rounded-[2px] ${showForm ? 'bg-[#EF4444] text-white border-transparent shadow-[0_0_15px_rgba(239,68,68,0.4)]' : 'bg-white text-black border-transparent hover:bg-[#A1A1AA] hover:text-white'}`}
           >
@@ -190,7 +191,7 @@ export default function PayrollPage() {
 
       <div className="">
         {/* Month Selector & Total */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12 p-10 lg:p-12 bg-[#0A0A0A] border-2 border-[#333] rounded-[4px] transition-all duration-500 hover:border-[#666] hover:bg-[#111] shadow-[0_4px_24px_rgba(0,0,0,0.5)]">
+        <div data-tour="payroll-overview" className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12 p-10 lg:p-12 bg-[#0A0A0A] border-2 border-[#333] rounded-[4px] transition-all duration-500 hover:border-[#666] hover:bg-[#111] shadow-[0_4px_24px_rgba(0,0,0,0.5)]">
           <div className="flex items-center gap-4">
             <button
               onClick={() => {
@@ -239,7 +240,7 @@ export default function PayrollPage() {
 
         {/* Config Form */}
         {showConfig && (
-          <div className="mb-12 p-10 lg:p-14 bg-[#0A0A0A] border-2 border-[#333] rounded-[4px] transition-all duration-500 hover:border-[#666] hover:bg-[#111] shadow-lg">
+          <div data-tour="deductions" className="mb-12 p-10 lg:p-14 bg-[#0A0A0A] border-2 border-[#333] rounded-[4px] transition-all duration-500 hover:border-[#666] hover:bg-[#111] shadow-lg">
             <h3 className="font-mono text-sm font-bold tracking-widest uppercase text-white mb-8 border-b-2 border-[#222] pb-4">Base Wage Configuration</h3>
             <form onSubmit={handleConfigSubmit} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               <div className="flex flex-col gap-2">
@@ -362,7 +363,7 @@ export default function PayrollPage() {
         )}
 
         {/* Summary Mini-Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div data-tour="income-stats" className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <div className="p-8 lg:p-10 bg-[#0A0A0A] hover:bg-[#111] border-2 border-[#333] rounded-[4px] flex flex-col gap-2 transition-all duration-500 hover:border-[#666] shadow-md relative overflow-hidden group">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.02)_0%,transparent_100%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             <span className="font-mono text-[10px] text-[#E4E4E7] uppercase tracking-widest relative z-10">Day Yield</span>
@@ -381,7 +382,7 @@ export default function PayrollPage() {
         </div>
 
         {/* Calendar Grid */}
-        <div className="border-2 border-[#555] bg-[#0A0A0A] rounded-[2px] p-6 lg:p-8">
+        <div data-tour="income-list" className="border-2 border-[#555] bg-[#0A0A0A] rounded-[2px] p-6 lg:p-8">
           <div className="flex justify-between items-center mb-6 border-b-2 border-[#555] pb-4">
              <span className="font-mono text-xs text-[#E4E4E7] uppercase tracking-widest">Matrix / {monthNames[selectedMonth - 1]}</span>
           </div>

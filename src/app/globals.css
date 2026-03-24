@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "driver.js/dist/driver.css";
 
 :root {
   /* Primary Colors */
@@ -107,4 +108,233 @@ input[type="number"]::-webkit-outer-spin-button {
 
 input[type="number"] {
   -moz-appearance: textfield;
+}
+
+/* ========== DRIVER.JS FLOW9 STYLES ========== */
+
+/* Overlay làm mờ với lỗ tự nhiên cho element */
+.driver-active .driver-overlay {
+  fill: rgba(0, 0, 0, 0.7) !important;
+}
+
+/* Element được focus nổi bật */
+.driver-active .driver-active-element {
+  outline: 2px solid #22C55E !important;
+  outline-offset: 4px !important;
+  border-radius: 4px !important;
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.4) !important;
+  position: relative;
+  z-index: 1000000001 !important;
+}
+
+/* Popover đặt cùng vị trí với element được focus */
+.driver-popover {
+  background-color: #0A0A0A !important;
+  border: 2px solid #555 !important;
+  border-radius: 4px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8) !important;
+  color: #FAFAFA !important;
+  position: fixed !important;
+  z-index: 1000000002 !important;
+}
+
+/* Left positioned popover */
+.driver-popover.driver-has-left-side-pos {
+  left: calc(100% + 20px) !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+}
+
+/* Right positioned popover */
+.driver-popover.driver-has-right-side-pos {
+  right: calc(100% + 20px) !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+}
+
+/* Top positioned popover */
+.driver-popover.driver-has-top-side-pos {
+  top: calc(100% + 20px) !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+}
+
+/* Bottom positioned popover */
+.driver-popover.driver-has-bottom-side-pos {
+  bottom: calc(100% + 20px) !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+}
+
+.driver-popover-title {
+  color: #FAFAFA !important;
+  font-family: 'Space Mono', monospace !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  border-bottom: 1px solid #333 !important;
+  padding: 12px 16px !important;
+}
+
+.driver-popover-description {
+  color: #A1A1AA !important;
+  font-family: 'Space Mono', monospace !important;
+  font-size: 11px !important;
+  line-height: 1.5 !important;
+  padding: 12px 16px !important;
+}
+
+.driver-popover-close-btn {
+  color: #71717A !important;
+}
+
+.driver-popover-close-btn:hover {
+  color: #EF4444 !important;
+}
+
+.driver-popover-footer {
+  border-top: 1px solid #333 !important;
+  padding: 10px 16px !important;
+}
+
+.driver-popover-progress-text {
+  color: #71717A !important;
+  font-family: 'Space Mono', monospace !important;
+  font-size: 10px !important;
+  text-transform: uppercase !important;
+}
+
+.driver-popover-footer button {
+  background-color: #111 !important;
+  border: 1px solid #555 !important;
+  color: #A1A1AA !important;
+  font-family: 'Space Mono', monospace !important;
+  font-size: 10px !important;
+  text-transform: uppercase !important;
+  border-radius: 2px !important;
+  padding: 5px 12px !important;
+}
+
+.driver-popover-footer button:hover {
+  background-color: #222 !important;
+  border-color: #FAFAFA !important;
+  color: #FAFAFA !important;
+}
+
+.driver-popover-navigation-btns button:last-child {
+  background-color: #22C55E !important;
+  border-color: #22C55E !important;
+  color: #000 !important;
+}
+
+/* Arrow */
+.driver-popover-arrow {
+  border-color: #22C55E !important;
+}
+
+/* Loại bỏ mask từ driver.js để phần highlighted không bị làm mờ */
+.driver-active .driver-overlay-mask {
+  display: none !important;
+}
+
+/* Highlight element với border xanh và glow - KHÔNG bị dim */
+.driver-active .driver-active-element {
+  position: relative !important;
+  z-index: 1000000001 !important;
+  outline: 2px solid #22C55E !important;
+  outline-offset: 4px !important;
+  border-radius: 4px !important;
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.5), 0 0 40px rgba(34, 197, 94, 0.2) !important;
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+/* Đảm bảo active element và popover nằm trên overlay */
+.driver-active .driver-active-element,
+.driver-active .driver-popover {
+  position: relative;
+}
+
+/* Dark theme popover */
+.driver-popover {
+  background-color: #0A0A0A !important;
+  border: 2px solid #555 !important;
+  border-radius: 4px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8), 0 0 60px rgba(34, 197, 94, 0.1) !important;
+  color: #FAFAFA !important;
+  z-index: 1000000002 !important;
+}
+
+.driver-popover-title {
+  color: #FAFAFA !important;
+  font-family: 'Space Mono', monospace !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  border-bottom: 1px solid #333 !important;
+  padding: 12px 16px !important;
+}
+
+.driver-popover-description {
+  color: #A1A1AA !important;
+  font-family: 'Space Mono', monospace !important;
+  font-size: 11px !important;
+  line-height: 1.5 !important;
+  padding: 12px 16px !important;
+}
+
+.driver-popover-close-btn {
+  color: #71717A !important;
+  font-size: 18px !important;
+}
+
+.driver-popover-close-btn:hover {
+  color: #EF4444 !important;
+}
+
+.driver-popover-footer {
+  border-top: 1px solid #333 !important;
+  padding: 10px 16px !important;
+}
+
+.driver-popover-progress-text {
+  color: #71717A !important;
+  font-family: 'Space Mono', monospace !important;
+  font-size: 10px !important;
+  text-transform: uppercase !important;
+}
+
+.driver-popover-footer button {
+  background-color: #111 !important;
+  border: 1px solid #555 !important;
+  color: #A1A1AA !important;
+  font-family: 'Space Mono', monospace !important;
+  font-size: 10px !important;
+  text-transform: uppercase !important;
+  border-radius: 2px !important;
+  padding: 5px 12px !important;
+}
+
+.driver-popover-footer button:hover {
+  background-color: #222 !important;
+  border-color: #FAFAFA !important;
+  color: #FAFAFA !important;
+}
+
+.driver-popover-navigation-btns button:last-child {
+  background-color: #22C55E !important;
+  border-color: #22C55E !important;
+  color: #000 !important;
+}
+
+.driver-popover-navigation-btns button:last-child:hover {
+  background-color: #16A34A !important;
+  border-color: #16A34A !important;
+}
+
+/* Arrow màu xanh */
+.driver-popover-arrow {
+  border-color: #22C55E !important;
 }

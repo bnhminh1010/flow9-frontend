@@ -3,6 +3,7 @@ import { Space_Mono } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/hooks/useAuth";
 import { LanguageProvider } from "@/contexts/LanguageContext";
+import { TutorialProvider } from "@/contexts/TutorialContext";
 
 const spaceMono = Space_Mono({ weight: ["400", "700"], subsets: ["latin"] });
 
@@ -44,7 +45,9 @@ export default function RootLayout({
       <body className={`${spaceMono.className} antialiased bg-[#000000] text-[#FAFAFA]`}>
         <AuthProvider>
           <LanguageProvider>
-            {children}
+            <TutorialProvider>
+              {children}
+            </TutorialProvider>
           </LanguageProvider>
         </AuthProvider>
       </body>

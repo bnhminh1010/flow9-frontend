@@ -277,7 +277,7 @@ export default function LedgerPage() {
       </header>
 
       {/* Stats Row */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6 mb-8 lg:mb-12">
+      <div data-tour="category-stats" className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6 mb-8 lg:mb-12">
         <div className="p-6 md:p-8 bg-[#0A0A0A] border-2 border-[#333] hover:border-white transition-all rounded-[2px] group relative overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(34,197,94,0.05)_0%,transparent_100%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
           <span className="font-mono text-xs text-[#22C55E] uppercase tracking-widest relative z-10">Total Income</span>
@@ -298,7 +298,7 @@ export default function LedgerPage() {
       </div>
 
       {/* Quick Input */}
-      <div className="mb-8 lg:mb-12 border-2 border-[#333] bg-[#0A0A0A] rounded-[2px] p-6 lg:p-10 focus-within:border-white focus-within:shadow-[0_0_20px_rgba(255,255,255,0.05)] transition-all">
+      <div data-tour="add-transaction-btn" className="mb-8 lg:mb-12 border-2 border-[#333] bg-[#0A0A0A] rounded-[2px] p-6 lg:p-10 focus-within:border-white focus-within:shadow-[0_0_20px_rgba(255,255,255,0.05)] transition-all">
         <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-6 relative group">
           <span className="font-mono text-white text-3xl hidden md:flex items-center">{">"}</span>
           <input
@@ -325,7 +325,7 @@ export default function LedgerPage() {
       </div>
 
       {/* Filters */}
-      <div className="mb-6 flex flex-col xl:flex-row gap-4 justify-between">
+      <div data-tour="ledger-filters" className="mb-6 flex flex-col xl:flex-row gap-4 justify-between">
         <div className="flex bg-[#0A0A0A] border-2 border-[#333] p-1 rounded-[2px] w-full xl:w-auto overflow-x-auto">
           {(['all', 'income', 'expense'] as const).map(type => (
             <button
@@ -359,13 +359,14 @@ export default function LedgerPage() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="SEARCH / QUERY_"
+            data-tour="ledger-search"
             className="px-6 py-4 xl:py-3 bg-[#0A0A0A] border-2 border-[#333] text-white font-mono text-xs rounded-[2px] outline-none focus:border-white w-full sm:flex-1 xl:w-64 uppercase tracking-widest placeholder-[#555]"
           />
         </div>
       </div>
 
       {/* Transactions List */}
-      <div className="space-y-6">
+      <div data-tour="ledger-table" className="space-y-6">
         {Object.entries(groupedTransactions).map(([date, trans]) => {
           const dayIncome = trans.filter(t => t.type === 'income').reduce((sum, t) => sum + t.amount, 0);
           const dayExpense = trans.filter(t => t.type === 'expense').reduce((sum, t) => sum + t.amount, 0);

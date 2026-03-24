@@ -151,7 +151,7 @@ export default function DashboardPage() {
       </header>
 
       {/* Main Stats Grid */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-6 lg:mb-8">
+      <div data-tour="summary-cards" className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-6 lg:mb-8">
         {/* Payroll */}
         <div className="p-6 bg-[#0A0A0A] border-2 border-[#333] rounded-[2px] hover:border-[#666] hover:bg-[#111] transition-all group relative overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.02)_0%,transparent_100%)] opacity-0 group-hover:opacity-100 transition-opacity"></div>
@@ -348,7 +348,7 @@ export default function DashboardPage() {
       </div>
 
       {/* Recent Activity */}
-      <div className="bg-[#0A0A0A] border-2 border-[#333] rounded-[2px] overflow-hidden mb-6">
+      <div data-tour="recent-transactions" className="bg-[#0A0A0A] border-2 border-[#333] rounded-[2px] overflow-hidden mb-6">
         <div className="p-6 bg-[#050505] border-b-2 border-[#333] flex justify-between items-center group">
           <h3 className="font-mono text-sm font-bold text-white uppercase tracking-widest">Activity Log</h3>
           <a href="/dashboard/ledger" className="font-mono text-[10px] uppercase tracking-widest text-[#FAFAFA] border-2 border-[#E4E4E7] px-4 py-2 bg-[#111] hover:bg-[#E4E4E7] hover:text-black transition-colors rounded-[2px]">

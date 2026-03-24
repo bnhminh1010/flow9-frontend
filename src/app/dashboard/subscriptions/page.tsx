@@ -196,6 +196,7 @@ export default function SubscriptionsPage() {
           </div>
         </div>
         <button
+          data-tour="add-subscription-btn"
           onClick={() => { if (showForm) cancelEdit(); else setShowForm(true); }}
           className="font-mono text-xs uppercase tracking-widest text-black bg-white px-6 py-3 border-2 border-transparent hover:bg-[#A1A1AA] hover:text-white transition-colors rounded-[2px]"
         >
@@ -205,7 +206,7 @@ export default function SubscriptionsPage() {
 
       <div className="">
         {/* Stats Row */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        <div data-tour="subscription-summary" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
           <div className="p-6 lg:p-8 bg-[#0A0A0A] border-2 border-[#333] rounded-[4px]">
             <span className="font-mono text-[10px] text-[#E4E4E7] uppercase tracking-widest">Monthly Burn</span>
             <h3 className="text-2xl lg:text-4xl font-black tracking-tighter text-[#EF4444]">
@@ -258,6 +259,7 @@ export default function SubscriptionsPage() {
               <div className="flex flex-col gap-2">
                 <label className="font-mono text-[10px] text-[#E4E4E7] uppercase tracking-widest">Billing Cycle</label>
                 <select
+                  data-tour="billing-cycle"
                   value={formData.billingCycle}
                   onChange={(e) => setFormData({ ...formData, billingCycle: e.target.value })}
                   className="w-full p-4 bg-[#050505] border-2 border-[#555] text-white font-mono outline-none focus:border-white transition-colors rounded-[2px] appearance-none"
@@ -324,7 +326,7 @@ export default function SubscriptionsPage() {
         )}
 
         {/* Grid View */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 w-full">
+        <div data-tour="subscription-list" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 w-full">
           {subscriptions.map((sub) => {
             const daysUntil = getDaysUntil(sub.nextBillingDate);
             const segments = getCountdownSegments(daysUntil);
@@ -367,7 +369,7 @@ export default function SubscriptionsPage() {
                 </div>
 
                 {/* Progress Bar */}
-                <div className="flex gap-1 mb-4 h-2">
+                <div data-tour="upcoming-payments" className="flex gap-1 mb-4 h-2">
                   {segments.map((filled, i) => (
                     <div
                       key={i}
